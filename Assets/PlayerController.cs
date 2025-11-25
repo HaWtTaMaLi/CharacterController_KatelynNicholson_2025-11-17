@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        Player.transform.position += move * speed * Time.deltaTime; //change transform to Move character controller methods
+        playerController.Move(move * speed * Time.deltaTime); //change transform to Move character controller methods
 
     }
 
