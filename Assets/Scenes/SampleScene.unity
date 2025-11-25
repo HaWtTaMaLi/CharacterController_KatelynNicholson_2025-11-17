@@ -1663,9 +1663,9 @@ MonoBehaviour:
   Player: {fileID: 1258031819}
   speed: 5
   jumpHeight: 1.5
-  gravity: -9
+  jumpPower: 1
+  gravity: 9.81
   playerController: {fileID: 1258031821}
-  isGrounded: 1
   playerVelocity: {x: 0, y: 0, z: 0}
   Move: {fileID: 736510327}
   Look: {fileID: 2139735215}
@@ -1695,7 +1695,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.01
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1258031823
@@ -23529,7 +23529,7 @@ GameObject:
   - component: {fileID: 1825643314500077938}
   - component: {fileID: 4319704722518397674}
   - component: {fileID: 9207700830373881746}
-  - component: {fileID: 7451169022892432045}
+  - component: {fileID: 9207700830373881747}
   m_Layer: 0
   m_Name: Ramp
   m_TagString: Untagged
@@ -23631,27 +23631,6 @@ MonoBehaviour:
         m_Circumference: 0
         m_Sides: 1
         m_InnerRadius: 0
---- !u!65 &5131462699861986374
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5291648407642039086}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2.5, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5210637385974699494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23696,7 +23675,7 @@ GameObject:
   - component: {fileID: 4669668878476049248}
   - component: {fileID: 2537636142005515725}
   - component: {fileID: 3800032276160015509}
-  - component: {fileID: 5131462699861986374}
+  - component: {fileID: 6838057776285525408}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -23851,6 +23830,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6838057776285525408
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291648407642039086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1804579427}
 --- !u!65 &6907675120590630605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24030,27 +24031,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7160956184270000858}
   m_Mesh: {fileID: 1052759187}
---- !u!65 &7451169022892432045
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4562185713158465030}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 1, z: 7.145716}
-  m_Center: {x: -0.00000004470348, y: 0, z: 2.5779355}
 --- !u!114 &7480363089475814215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44204,6 +44184,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4562185713158465030}
+  m_Mesh: {fileID: 99993965}
+--- !u!64 &9207700830373881747
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562185713158465030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
   m_Mesh: {fileID: 99993965}
 --- !u!114 &9218258477941666856
 MonoBehaviour:

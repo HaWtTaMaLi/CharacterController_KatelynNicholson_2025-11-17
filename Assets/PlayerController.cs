@@ -7,10 +7,10 @@ public class PlayerController : MonoBehaviour
 
     public int speed = 5;
     public float jumpHeight = 1.5f;
-    public float gravity = -9f;
+    public float jumpPower;
+    public float gravity = -9.81f;
 
     public CharacterController playerController; //get component
-    public bool isGrounded = true;
     public Vector3 playerVelocity;
 
     [Header("Input Actions")]
@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        isGrounded = playerController.isGrounded;
 
         float x = Input.GetAxis("Horizontal"); //W && S
         float z = Input.GetAxis("Vertical"); //A && D
@@ -32,6 +31,21 @@ public class PlayerController : MonoBehaviour
 
         playerController.Move(move * speed * Time.deltaTime); //change transform to Move character controller methods
 
+        if (playerController.isGrounded && playerVelocity.y < 0)
+        {
+            playerVelocity.y = -2f; //constant gounding
+        }
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        playerController.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void Jumping(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (!playerController.isGrounded) return;
+
+        playerVelocity.y += jumpHeight;
     }
 
 }
