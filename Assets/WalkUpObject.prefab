@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9170897912231489349}
   - component: {fileID: 6442017885500940109}
   - component: {fileID: 7381750629036749658}
-  - component: {fileID: 3234571644276827747}
+  - component: {fileID: 1820982454326019170}
   m_Layer: 0
   m_Name: WalkUpObject
   m_TagString: Untagged
@@ -330,8 +330,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8877968102197258884}
   m_Mesh: {fileID: 0}
---- !u!64 &3234571644276827747
-MeshCollider:
+--- !u!65 &1820982454326019170
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -348,7 +348,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 2.2816281}
+  m_Center: {x: 0, y: 0, z: 0.64081407}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4669668879923608276}
   - component: {fileID: 2537636141170324601}
   - component: {fileID: 3800032275383545121}
-  - component: {fileID: 944563325918149425}
+  - component: {fileID: 5131462699094953458}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291648408401732250}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 0.22000003, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1149,8 +1149,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291648408401732250}
   m_Mesh: {fileID: 0}
---- !u!64 &944563325918149425
-MeshCollider:
+--- !u!65 &5131462699094953458
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1167,7 +1167,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2.5, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}

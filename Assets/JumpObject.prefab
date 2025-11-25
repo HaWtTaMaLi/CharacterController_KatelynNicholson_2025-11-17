@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5554405437706678423}
   - component: {fileID: 3003133740370647712}
   - component: {fileID: 6596459222008484568}
-  - component: {fileID: 4356475669775196158}
+  - component: {fileID: 392171412882673978}
   m_Layer: 0
   m_Name: JumpObject
   m_TagString: Untagged
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 205
+  m_VersionIndex: 211
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -330,8 +330,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396960522995963762}
   m_Mesh: {fileID: 0}
---- !u!64 &4356475669775196158
-MeshCollider:
+--- !u!65 &392171412882673978
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -348,7 +348,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.99999994, y: 1, z: 2.2816281}
+  m_Center: {x: 0, y: 0, z: 0.64081407}
