@@ -8,10 +8,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 3f; //low walk speed to notice >
     public float sprintSpeed = 8f; //> the difference in sprinting.
     public float jumpHeight = 0.8f; //1.5 was to high imo
-    public float fallTime = 0f; //change later
+    public float airTime = 0f;
     public float gravity = -9.81f;
     public bool isGrounded = true; 
     public Vector3 velocity;
+    public Vector3 lastPosition;
 
     [Header("Look Settings")]
     public float mouseSensitivity = 25f; //100 is way to high lol
@@ -91,7 +92,14 @@ public class PlayerController : MonoBehaviour
 
         Vector2 input = Move.action.ReadValue<Vector2>();
         float currentSpeed = Sprint.action.IsPressed() ? sprintSpeed : speed;
-        Debug.Log($"Sprint check: IsPressed={Sprint.action.IsPressed()}");
+        //Debug.Log($"Sprint check: IsPressed={Sprint.action.IsPressed()}");
+
+        float speedFlightCap = 0.4f; //percent of speed used, only 40% of speed is used when in flight
+
+        if (!isGrounded)
+        {
+            currentSpeed *= speedFlightCap; 
+        }
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -102,7 +110,7 @@ public class PlayerController : MonoBehaviour
          
         if (Jump.action.triggered && isGrounded)
         {
-            Debug.Log("Jump Triggered");
+            //Debug.Log("Jump Triggered");
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
         }
     }
@@ -116,7 +124,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ApplyGravity()
     {
-        Debug.Log("Gravity Applied");
+        //Debug.Log("Gravity Applied");
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
