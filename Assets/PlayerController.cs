@@ -7,12 +7,20 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Speed")]
     public float speed = 3f; //low walk speed to notice >
     public float sprintSpeed = 8f; //> the difference in sprinting.
+    public Vector3 velocity;
+
+    [Header("Jump Settings")]
     public float jumpHeight = 0.8f; //1.5 was to high imo
     public float airTime = 0f;
     public float gravity = -9.81f;
-    public bool isGrounded = true; 
-    public Vector3 velocity;
     public Vector3 lastPosition;
+    public bool isGrounded = true;
+
+    [Header("Crouch Settings")]
+    public float normalHeight = 2f;
+    public float crouchHeight = 1f;
+    public float crouchSpeed = 1.5f;
+    public bool isCrouching = false;
 
     [Header("Look Settings")]
     public float mouseSensitivity = 25f; //100 is way to high lol
