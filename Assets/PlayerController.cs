@@ -97,11 +97,21 @@ public class PlayerController : MonoBehaviour
 
     public void UseMove()
     {
-        //Debug.Log("Move Triggered");
 
         Vector2 input = Move.action.ReadValue<Vector2>();
-        float currentSpeed = Sprint.action.IsPressed() ? sprintSpeed : speed;
-        //Debug.Log($"Sprint check: IsPressed={Sprint.action.IsPressed()}");
+        float currentSpeed;
+        if (isCrouching) //if we are crouching
+        {
+            currentSpeed = crouchSpeed; //force crouch speed
+        }
+        else if (Sprint.action.IsPressed())
+        {
+            currentSpeed = sprintSpeed; 
+        }
+        else
+        {
+            currentSpeed = speed;
+        }
 
         float speedFlightCap = 0.4f; //percent of speed used, only 40% of speed is used when in flight
 
@@ -113,6 +123,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
+
     public void UseJump()
     {
         float groundSnap = -2f;
