@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float crouchSpeed = 1f;
     public float cameraTransition = 5f;
     public Vector3 standCamera = new Vector3(-0.03908123f, 1.97f, 0.2218122f);
-    public Vector3 crouchCamera = new Vector3(-0.03908123f, 1f, 0.2218122f);
+    public Vector3 crouchCamera = new Vector3(-0.03908123f, 1.01f, 0.32f);
     public bool isCrouching = false;
 
     [Header("Look Settings")]
