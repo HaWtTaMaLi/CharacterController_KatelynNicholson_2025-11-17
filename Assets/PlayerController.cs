@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
     public float normalHeight = 2f;
     public float crouchHeight = 1f;
     public float crouchSpeed = 1f;
+    public float cameraTransition = 5f;
+    public Vector3 standCamera = new Vector3(0, 1.97f, 0);
+    public Vector3 crouchCamera = new Vector3(0, 0.8f, 0);
     public bool isCrouching = false;
 
     [Header("Look Settings")]
@@ -37,7 +41,6 @@ public class PlayerController : MonoBehaviour
     public InputActionReference Move;
     public InputActionReference Jump;
     public InputActionReference Sprint;
-    public InputActionReference Interact;
     public InputActionReference Crouch;
 
     void Start()
@@ -54,10 +57,8 @@ public class PlayerController : MonoBehaviour
         Move.action.Enable();
         Jump.action.Enable();
         Sprint.action.Enable();
-        Interact.action.Enable();
         Crouch.action.Enable();
     }
-
 
     void Update()
     {
@@ -75,7 +76,6 @@ public class PlayerController : MonoBehaviour
         UseMove();
         UseJump();
         ApplyGravity();
-        UseInteract();
         UseCrouch();
 
     }
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         transformCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * mouseX);
     }
+
     public void UseMove()
     {
         //Debug.Log("Move Triggered");
@@ -122,10 +123,7 @@ public class PlayerController : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
         }
     }
-    public void UseInteract()
-    {
 
-    }
     public void UseCrouch()
     {
         float halfHeight = 2f;
@@ -147,6 +145,11 @@ public class PlayerController : MonoBehaviour
                 isCrouching = true;
             }
         }
+
+        Vector3 targetPos = isCrouching ? crouchCamera : standCamera;
+        transformCamera.localPosition = Vector3.Lerp
+        (transformCamera.localPosition, targetPos, 
+        Time.deltaTime * cameraTransition);
     }
 
     public void ApplyGravity()
