@@ -18,12 +18,13 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
 
     [Header("Crouch Settings")]
+    public Animator crouch;
     public float normalHeight = 2f;
     public float crouchHeight = 1f;
     public float crouchSpeed = 1f;
     public float cameraTransition = 5f;
     public Vector3 standCamera = new Vector3(-0.03908123f, 1.97f, 0.2218122f);
-    public Vector3 crouchCamera = new Vector3(-0.03908123f, 0.8f, 0.2218122f);
+    public Vector3 crouchCamera = new Vector3(-0.03908123f, 1f, 0.2218122f);
     public bool isCrouching = false;
 
     [Header("Look Settings")]
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         float groundSnap = -2f;
          
-        if (Jump.action.triggered && isGrounded)
+        if (Jump.action.triggered && isGrounded && !isCrouching)
         {
             //Debug.Log("Jump Triggered");
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         float halfHeight = 2f;
 
-        if (Crouch.action.triggered)
+        if (Crouch.action.triggered && isGrounded)
         {
             if (isCrouching)
             {
@@ -155,8 +156,11 @@ public class PlayerController : MonoBehaviour
                 speed = crouchSpeed;
                 isCrouching = true;
             }
+            //play animation
+            crouch.SetBool("isCrouching", isCrouching);
         }
 
+        //camera transition 
         Vector3 targetPos = isCrouching ? crouchCamera : standCamera;
         transformCamera.localPosition = Vector3.Lerp
         (transformCamera.localPosition, targetPos, 
