@@ -30,7 +30,7 @@
                     "id": "2126ffe1-586d-4c85-84f6-8cf97f0f9416",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -57,7 +57,7 @@
                     "id": "b81312b8-6ee0-4fe2-b26c-7e4afb7bee2a",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -121,7 +121,7 @@
                     "name": "",
                     "id": "7d09aea5-db15-4140-a7c3-6deaf92bd0dd",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
@@ -132,7 +132,7 @@
                     "name": "",
                     "id": "dc1d98e8-eaaf-464c-b666-b6c433a4b4fc",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
@@ -143,7 +143,7 @@
                     "name": "",
                     "id": "c0edf83b-23d2-423e-a1f3-de73ae75baf6",
                     "path": "<Keyboard>/f",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",

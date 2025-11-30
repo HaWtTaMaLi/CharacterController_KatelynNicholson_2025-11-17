@@ -3,50 +3,124 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject Player;
-
-    public int speed = 5;
+    [Header("Movement Speed")]
+    public float speed = 3f;
+    public float sprintSpeed = 8f;
     public float jumpHeight = 1.5f;
-    public float jumpPower;
     public float gravity = -9.81f;
 
-    public CharacterController playerController; //get component
-    public Vector3 playerVelocity;
+    [Header("Look Settings")]
+    public float mouseSensitivity = 100f;
+    public float xRotation = 0f;
+    public float upClamp = -90f;
+    public float downClamp = 30f;
+
+    [Header("References")]
+    public Transform transformCamera;
+    public CharacterController characterController;
 
     [Header("Input Actions")]
-    public InputActionReference Move; //vector2
-    public InputActionReference Look; //vector2
-    public InputActionReference Jump; //button
-    public InputActionReference Sprint; //button
-    public InputActionReference Interact; //button
-    public InputActionReference Crouch; //button
+    public InputActionReference Look;
+    public InputActionReference Move;
+    public InputActionReference Jump;
+    public InputActionReference Sprint;
+    public InputActionReference Interact;
+    public InputActionReference Crouch;
 
-    public void Update()
+    public bool isGrounded = true;
+    public Vector3 velocity;
+
+    void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        characterController = GetComponent<CharacterController>();
+        transformCamera = Camera.main.transform;
 
-        float x = Input.GetAxis("Horizontal"); //W && S
-        float z = Input.GetAxis("Vertical"); //A && D
+        Look.action.actionMap.Enable();
 
-        Vector3 move = transform.right * x + transform.forward * z;
 
-        playerController.Move(move * speed * Time.deltaTime); //change transform to Move character controller methods
+        //Enable actions
+        Look.action.Enable();
+        Move.action.Enable();
+        Jump.action.Enable();
+        Sprint.action.Enable();
+        Interact.action.Enable();
+        Crouch.action.Enable();
+    }
 
-        if (playerController.isGrounded && playerVelocity.y < 0)
+
+    void Update()
+    {
+        float groundSnap = -2f;
+        //Debug.Log($"Jump value: {Jump.action.ReadValue<float>()}");
+
+        isGrounded = characterController.isGrounded;
+
+        if(isGrounded && velocity.y < 0)
         {
-            playerVelocity.y = -2f; //constant gounding
+            velocity.y = groundSnap;
         }
 
-        playerVelocity.y += gravity * Time.deltaTime;
-        playerController.Move(playerVelocity * Time.deltaTime);
+        UseLook();
+        UseMove();
+        UseJump();
+        ApplyGravity();
+        UseSprint();
+        UseInteract();
+        UseCrouch();
+
     }
 
-    public void Jumping(InputAction.CallbackContext context)
+    public void UseLook()
     {
-        if (!context.started) return;
-        if (!playerController.isGrounded) return;
+        //Debug.Log("Look Triggered");
 
-        playerVelocity.y += jumpHeight;
+        Vector2 lookInput = Look.action.ReadValue<Vector2>();
+        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, upClamp, downClamp);
+
+        transformCamera.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.Rotate(Vector3.up * mouseX);
     }
+    public void UseMove()
+    {
+        //Debug.Log("Move Triggered");
 
+        Vector2 input = Move.action.ReadValue<Vector2>();
+        float currentSpeed = Sprint.action.IsPressed() ? sprintSpeed : speed;
+
+        Vector3 move = transform.right * input.x + transform.forward * input.y;
+        characterController.Move(move * currentSpeed * Time.deltaTime);
+    }
+    public void UseJump()
+    {
+        float groundSnap = -2f;
+         
+        if (Jump.action.triggered && isGrounded)
+        {
+            Debug.Log("Jump Triggered");
+            velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
+        }
+    }
+    public void UseSprint()
+    {
+
+    }
+    public void UseInteract()
+    {
+
+    }
+    public void UseCrouch()
+    {
+
+    }
+    public void ApplyGravity()
+    {
+        Debug.Log("Gravity Applied");
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
+    }
 }
-

@@ -1,19 +1,2 @@
 fileFormatVersion: 2
-guid: 18ab7eac50ae1d64bbfbf74c83fd25ba
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences:
-  - Player: {instanceID: 0}
-  - playerController: {instanceID: 0}
-  - Move: {fileID: -637664404012739928, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  - Look: {fileID: 808797049970895421, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  - Jump: {fileID: 3947247268989050484, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  - Sprint: {fileID: -719775260297303928, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  - Interact: {fileID: -6735944378461414448, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  - Crouch: {fileID: -574459635461833257, guid: 7749f68f27233c4428f13eaf5955e613, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+guid: 86bd9326191586e448a1d463d56e6aab
