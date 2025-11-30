@@ -9085,8 +9085,8 @@ MonoBehaviour:
   crouchHeight: 1
   crouchSpeed: 1.5
   cameraTransition: 5
-  standCamera: {x: 0, y: 0.8, z: 0}
-  crouchCamera: {x: 0, y: 0.4, z: 0}
+  standCamera: {x: -0.03908123, y: 1.98, z: 0.2218122}
+  crouchCamera: {x: -0.03908123, y: 0.8, z: 0.2218122}
   isCrouching: 0
   mouseSensitivity: 30
   xRotation: 0
