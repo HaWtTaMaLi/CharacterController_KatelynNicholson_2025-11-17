@@ -3,17 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
     [Header("Movement Speed")]
-    public float speed = 3f;
-    public float sprintSpeed = 8f;
-    public float jumpHeight = 1.5f;
+    public float speed = 3f; //low walk speed to notice >
+    public float sprintSpeed = 8f; //> the difference in sprinting.
+    public float jumpHeight = 0.8f; //1.5 was to high imo
+    public float fallTime = 0f; //change later
     public float gravity = -9.81f;
+    public bool isGrounded = true; 
+    public Vector3 velocity;
 
     [Header("Look Settings")]
-    public float mouseSensitivity = 100f;
-    public float xRotation = 0f;
-    public float upClamp = -90f;
-    public float downClamp = 30f;
+    public float mouseSensitivity = 25f; //100 is way to high lol
+    public float xRotation = 0f; //No limit
+    public float upClamp = -90f; //Look Up
+    public float downClamp = 30f; //Look Down 
 
     [Header("References")]
     public Transform transformCamera;
@@ -26,9 +30,6 @@ public class PlayerController : MonoBehaviour
     public InputActionReference Sprint;
     public InputActionReference Interact;
     public InputActionReference Crouch;
-
-    public bool isGrounded = true;
-    public Vector3 velocity;
 
     void Start()
     {
@@ -65,7 +66,6 @@ public class PlayerController : MonoBehaviour
         UseMove();
         UseJump();
         ApplyGravity();
-        UseSprint();
         UseInteract();
         UseCrouch();
 
@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 input = Move.action.ReadValue<Vector2>();
         float currentSpeed = Sprint.action.IsPressed() ? sprintSpeed : speed;
+        Debug.Log($"Sprint check: IsPressed={Sprint.action.IsPressed()}");
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -104,10 +105,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Jump Triggered");
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
         }
-    }
-    public void UseSprint()
-    {
-
     }
     public void UseInteract()
     {
