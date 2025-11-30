@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Crouch Settings")]
     public float normalHeight = 2f;
     public float crouchHeight = 1f;
-    public float crouchSpeed = 1.5f;
+    public float crouchSpeed = 1f;
     public bool isCrouching = false;
 
     [Header("Look Settings")]
@@ -128,8 +128,27 @@ public class PlayerController : MonoBehaviour
     }
     public void UseCrouch()
     {
+        float halfHeight = 2f;
 
+        if (Crouch.action.triggered)
+        {
+            if (isCrouching)
+            {
+                characterController.height = normalHeight;
+                characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
+                speed = 3f;
+                isCrouching = false;
+            }
+            else
+            {
+                characterController.height = crouchHeight;
+                characterController.center = new Vector3(0, crouchHeight / halfHeight, 0);
+                speed = crouchSpeed;
+                isCrouching = true;
+            }
+        }
     }
+
     public void ApplyGravity()
     {
         //Debug.Log("Gravity Applied");
