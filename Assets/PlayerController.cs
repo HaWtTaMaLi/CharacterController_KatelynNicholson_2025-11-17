@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 0.8f; //1.5 was to high imo
     public float airTime = 0f;
     public float gravity = -9.81f;
-    //public Vector3 lastPosition; 
     public bool isGrounded = true;
 
     [Header("Crouch Settings")]
@@ -71,11 +69,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float groundSnap = -2f;
-        //Debug.Log($"Jump value: {Jump.action.ReadValue<float>()}");
-
         isGrounded = characterController.isGrounded;
 
-        if(isGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = groundSnap;
         }
@@ -108,33 +104,32 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 input = Move.action.ReadValue<Vector2>();
-        float currentSpeed;
 
         if (isCrouching) //if we are crouching
-            currentSpeed = crouchSpeed; //force crouch speed
+            currentVelocity = crouchSpeed; //force crouch speed
         else if (Sprint.action.IsPressed())
-            currentSpeed = sprintSpeed; 
+            currentVelocity = sprintSpeed; 
         else
-            currentSpeed = speed;
+            currentVelocity = speed;
 
         float speedFlightCap = 0.4f; //percent of speed used, only 40% of speed is used when in air
 
         if (!isGrounded)
-            currentSpeed *= speedFlightCap;
+            currentVelocity *= speedFlightCap;
 
         //acceleration/deceleration
-        currentVelocity = Mathf.Lerp(currentVelocity, currentSpeed, 
+        this.currentVelocity = Mathf.Lerp(this.currentVelocity, currentVelocity,
             Time.deltaTime * smoothSpeed);
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
-        characterController.Move(move * currentSpeed * Time.deltaTime);
+        characterController.Move(move * currentVelocity * Time.deltaTime);
     }
 
     public void UseJump()
     {
         float groundSnap = -2f;
          
-        if (Jump.action.triggered && isGrounded && !isCrouching)
+        if (Jump.action.triggered && isGrounded && !isCrouching && OnFlatGround())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
         }
@@ -176,6 +171,19 @@ public class PlayerController : MonoBehaviour
         transformCamera.localPosition = Vector3.Lerp
         (transformCamera.localPosition, targetPos,
         Time.deltaTime * cameraTransition);
+    }
+
+    public bool OnFlatGround()
+    {
+        RaycastHit hit;
+        float rayDistance = characterController.height / 2 + 0.02f;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayDistance, groundMask))
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            return slopeAngle <= characterController.slopeLimit;
+        }
+        return false;
     }
 
     public bool HeadDetect()
