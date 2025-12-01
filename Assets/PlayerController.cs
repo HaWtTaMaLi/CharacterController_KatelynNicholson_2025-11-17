@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 crouchCamera = new Vector3(-0.03908123f, 1.01f, 0.32f);
     public bool isCrouching = false;
 
+    [Header("Head Cheak")]
+    public Transform headCheck;
+    public float headCheckLength = 0.87f;
+    public LayerMask groundMask;
+
     [Header("Look Settings")]
     public float mouseSensitivity = 25f; //100 is way to high lol
     public float xRotation = 0f; //No limit
@@ -76,6 +81,7 @@ public class PlayerController : MonoBehaviour
         UseLook();
         UseMove();
         UseJump();
+        HeadDetect();
         ApplyGravity();
         UseCrouch();
 
@@ -139,25 +145,49 @@ public class PlayerController : MonoBehaviour
     public void UseCrouch()
     {
         float halfHeight = 2f;
+        bool wantsToStand = false;
 
         if (Crouch.action.triggered && isGrounded)
         {
             if (isCrouching)
             {
-                characterController.height = normalHeight;
-                characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
-                speed = 3f;
-                isCrouching = false;
+                if (!HeadDetect()) //stand up
+                {
+                    characterController.height = normalHeight;
+                    characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
+                    speed = 3f;
+
+                    crouch.SetBool("isCrouching", false); //play animation
+                    isCrouching = false;
+                }
+                else
+                {
+                    //cant stand yet
+                    wantsToStand = true;
+                }
             }
-            else
+            else //crouch down
             {
                 characterController.height = crouchHeight;
                 characterController.center = new Vector3(0, crouchHeight / halfHeight, 0);
                 speed = crouchSpeed;
+
+                crouch.SetBool("isCrouching", true); //play animation
                 isCrouching = true;
             }
-            //play animation
-            crouch.SetBool("isCrouching", isCrouching);
+
+            //auto stand when head not blocked
+            if (isCrouching && wantsToStand && !HeadDetect()) //crouch Down
+            {
+                characterController.height = normalHeight;
+                characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
+                speed = 3f;
+
+                crouch.SetBool("isCrouching", false); //play animation
+                isCrouching = false;
+
+                wantsToStand = false;
+            }
         }
 
         //camera transition 
@@ -167,6 +197,12 @@ public class PlayerController : MonoBehaviour
         Time.deltaTime * cameraTransition);
     }
 
+    public bool HeadDetect()
+    {
+        Vector3 start = transformCamera.position;
+        float checkDistance = normalHeight - crouchHeight;
+        return !Physics.Raycast(start, Vector3.up, checkDistance);
+    }
     public void ApplyGravity()
     {
         //Debug.Log("Gravity Applied");
