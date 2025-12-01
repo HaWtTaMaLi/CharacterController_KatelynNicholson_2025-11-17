@@ -272,10 +272,10 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 942685571}
 --- !u!33 &29987636
@@ -5318,10 +5318,10 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 150104245}
 --- !u!33 &590705301
@@ -7418,8 +7418,8 @@ Transform:
   m_GameObject: {fileID: 869758697}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7804, y: 0.5527, z: -5.5055995}
-  m_LocalScale: {x: 0.2678907, y: 0.54027027, z: 0.034324344}
+  m_LocalPosition: {x: -0.7804, y: 0.6289, z: -5.5055995}
+  m_LocalScale: {x: 0.2678907, y: 0.47932777, z: 0.034324344}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1377739961}
@@ -8973,10 +8973,10 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 529964895}
 --- !u!33 &1164915499
@@ -13243,8 +13243,8 @@ Transform:
   m_GameObject: {fileID: 1565672075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.0609, y: 0.8459, z: -7.43}
-  m_LocalScale: {x: 0.48024884, y: 0.6854624, z: 0.034324344}
+  m_LocalPosition: {x: -12.0609, y: 0.8615, z: -7.43}
+  m_LocalScale: {x: 0.48024884, y: 0.672987, z: 0.034324344}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 124564641}
@@ -15659,7 +15659,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
@@ -57745,6 +57745,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1087259196}
+  - {fileID: 1843928916}
+  - {fileID: 745229629}
+  - {fileID: 1795575067}
+  - {fileID: 167369539}
   - {fileID: 321729615065536967}
   - {fileID: 6337785397099357780}
   - {fileID: 1113302423}
@@ -57755,10 +57759,6 @@ SceneRoots:
   - {fileID: 1565672081}
   - {fileID: 1348563191}
   - {fileID: 6838057776285525407}
-  - {fileID: 1843928916}
-  - {fileID: 745229629}
-  - {fileID: 1795575067}
-  - {fileID: 167369539}
   - {fileID: 1924971538}
   - {fileID: 590705305}
   - {fileID: 1164915503}

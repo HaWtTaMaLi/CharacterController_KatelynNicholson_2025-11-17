@@ -145,55 +145,38 @@ public class PlayerController : MonoBehaviour
     public void UseCrouch()
     {
         float halfHeight = 2f;
-        bool wantsToStand = false;
 
         if (Crouch.action.triggered && isGrounded)
         {
+
             if (isCrouching)
             {
-                if (!HeadDetect()) //stand up
+                if (HeadDetect()) // why does it work without '!' i dunno lol
                 {
                     characterController.height = normalHeight;
                     characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
                     speed = 3f;
 
-                    crouch.SetBool("isCrouching", false); //play animation
                     isCrouching = false;
                 }
-                else
-                {
-                    //cant stand yet
-                    wantsToStand = true;
-                }
             }
-            else //crouch down
+            else
             {
                 characterController.height = crouchHeight;
                 characterController.center = new Vector3(0, crouchHeight / halfHeight, 0);
                 speed = crouchSpeed;
 
-                crouch.SetBool("isCrouching", true); //play animation
                 isCrouching = true;
             }
+            //play animation
+            crouch.SetBool("isCrouching", isCrouching);
 
-            //auto stand when head not blocked
-            if (isCrouching && wantsToStand && !HeadDetect()) //crouch Down
-            {
-                characterController.height = normalHeight;
-                characterController.center = new Vector3(0, normalHeight / halfHeight, 0);
-                speed = 3f;
-
-                crouch.SetBool("isCrouching", false); //play animation
-                isCrouching = false;
-
-                wantsToStand = false;
-            }
         }
 
         //camera transition 
         Vector3 targetPos = isCrouching ? crouchCamera : standCamera;
         transformCamera.localPosition = Vector3.Lerp
-        (transformCamera.localPosition, targetPos, 
+        (transformCamera.localPosition, targetPos,
         Time.deltaTime * cameraTransition);
     }
 
@@ -203,6 +186,7 @@ public class PlayerController : MonoBehaviour
         float checkDistance = normalHeight - crouchHeight;
         return !Physics.Raycast(start, Vector3.up, checkDistance);
     }
+
     public void ApplyGravity()
     {
         //Debug.Log("Gravity Applied");
