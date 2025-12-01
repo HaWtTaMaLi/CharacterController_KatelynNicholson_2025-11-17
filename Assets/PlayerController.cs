@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Speed")]
     public float speed = 3f; //low walk speed to notice >
     public float sprintSpeed = 8f; //> the difference in sprinting.
+    public float smoothSpeed = 10f; //higher = faster
+    public float currentVelocity = 0f;
     public Vector3 velocity;
 
     [Header("Jump Settings")]
     public float jumpHeight = 0.8f; //1.5 was to high imo
     public float airTime = 0f;
     public float gravity = -9.81f;
-    public Vector3 lastPosition;
+    //public Vector3 lastPosition; 
     public bool isGrounded = true;
 
     [Header("Crouch Settings")]
@@ -107,25 +109,21 @@ public class PlayerController : MonoBehaviour
 
         Vector2 input = Move.action.ReadValue<Vector2>();
         float currentSpeed;
-        if (isCrouching) //if we are crouching
-        {
-            currentSpeed = crouchSpeed; //force crouch speed
-        }
-        else if (Sprint.action.IsPressed())
-        {
-            currentSpeed = sprintSpeed; 
-        }
-        else
-        {
-            currentSpeed = speed;
-        }
 
-        float speedFlightCap = 0.4f; //percent of speed used, only 40% of speed is used when in flight
+        if (isCrouching) //if we are crouching
+            currentSpeed = crouchSpeed; //force crouch speed
+        else if (Sprint.action.IsPressed())
+            currentSpeed = sprintSpeed; 
+        else
+            currentSpeed = speed;
+
+        float speedFlightCap = 0.4f; //percent of speed used, only 40% of speed is used when in air
 
         if (!isGrounded)
-        {
-            currentSpeed *= speedFlightCap; 
-        }
+            currentSpeed *= speedFlightCap;
+
+        currentVelocity = Mathf.Lerp(currentVelocity, currentSpeed, 
+            Time.deltaTime * smoothSpeed);
 
         Vector3 move = transform.right * input.x + transform.forward * input.y;
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -137,7 +135,6 @@ public class PlayerController : MonoBehaviour
          
         if (Jump.action.triggered && isGrounded && !isCrouching)
         {
-            //Debug.Log("Jump Triggered");
             velocity.y = Mathf.Sqrt(jumpHeight * groundSnap * gravity);
         }
     }

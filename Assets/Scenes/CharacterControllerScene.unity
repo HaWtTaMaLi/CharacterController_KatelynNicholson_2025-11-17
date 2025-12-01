@@ -9528,11 +9528,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   sprintSpeed: 8
+  smoothSpeed: 10
+  currentVelocity: 0
   velocity: {x: 0, y: 0, z: 0}
   jumpHeight: 0.8
   airTime: 0
   gravity: -9.81
-  lastPosition: {x: 0, y: 0, z: 0}
   isGrounded: 1
   crouch: {fileID: 8362102596353586427}
   normalHeight: 2
@@ -57759,9 +57760,9 @@ SceneRoots:
   - {fileID: 1565672081}
   - {fileID: 1348563191}
   - {fileID: 6838057776285525407}
-  - {fileID: 1924971538}
   - {fileID: 590705305}
   - {fileID: 1164915503}
   - {fileID: 29987640}
-  - {fileID: 1258031823}
+  - {fileID: 1924971538}
   - {fileID: 1804179697}
+  - {fileID: 1258031823}
