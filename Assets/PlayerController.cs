@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded)
             currentSpeed *= speedFlightCap;
 
+        //acceleration/deceleration
         currentVelocity = Mathf.Lerp(currentVelocity, currentSpeed, 
             Time.deltaTime * smoothSpeed);
 
